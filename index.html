@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lohith Medisetti - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1A1A2E;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --primary-text: #F5F5F5;
+            --muted-text: #B0B0C0;
+            --accent-color: #FF2E63;
+            --hover-color: #FF577F;
+            --border-color: rgba(255, 255, 255, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --highlight-glow: rgba(255, 46, 99, 0.5);
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            color: var(--primary-text);
+            overflow-x: hidden;
+            position: relative;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle, #1A1A2E, #0F0F1F);
+        }
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.5), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: dataFloat 10s infinite linear;
+        }
+        @keyframes dataFloat {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            50% { opacity: 0.8; transform: translateY(-50vh) scale(1.1); }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0.6; }
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 1rem;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+        nav a {
+            color: var(--primary-text);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+        }
+        nav a:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+            text-shadow: 0 0 8px var(--highlight-glow);
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            scroll-snap-align: start;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.7);
+            z-index: 0;
+        }
+        .section > * {
+            position: relative;
+            z-index: 1;
+        }
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            text-align: center;
+            text-shadow: 0 2px 4px var(--shadow-color);
+        }
+        .section.visible h2 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            animation: slideHighlight 2s infinite;
+            box-shadow: 0 2px 6px var(--highlight-glow);
+        }
+        @keyframes slideHighlight {
+            0% { width: 100px; }
+            50% { width: 150px; }
+            100% { width: 100px; }
+        }
+        .hero {
+            text-align: center;
+            background: linear-gradient(180deg, rgba(26, 26, 46, 0.8), transparent);
+        }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+            transition: transform 0.4s, box-shadow 0.4s;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        .profile-img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px var(--shadow-color), 0 0 15px var(--highlight-glow);
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin: 0;
+            color: var(--primary-text);
+            animation: fadeIn 1.5s ease-out;
+            text-shadow: 0 2px 4px var(--shadow-color);
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--muted-text);
+            margin: 0.5rem 0;
+        }
+        .hero a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: text-shadow 0.3s;
+        }
+        .hero a:hover {
+            color: var(--hover-color);
+            text-shadow: 0 0 6px var(--highlight-glow);
+        }
+        .vertical-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.4s, box-shadow 0.4s;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px var(--shadow-color), 0 0 12px var(--highlight-glow);
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin: 0 0 0.8rem;
+            text-shadow: 0 1px 3px var(--shadow-color);
+        }
+        .card p {
+            color: var(--muted-text);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .card a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: text-shadow 0.3s;
+        }
+        .card a:hover {
+            color: var(--hover-color);
+            text-shadow: 0 0 6px var(--highlight-glow);
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 1rem 0;
+        }
+        .slide {
+            display: none;
+            animation: fade 0.8s ease-in-out;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.4s, box-shadow 0.4s;
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+        .slide img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px var(--shadow-color), 0 0 10px var(--highlight-glow);
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 12px;
+            color: var(--primary-text);
+            background: var(--card-bg);
+            font-size: 1.3rem;
+            border-radius: 50%;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 6px var(--shadow-color);
+        }
+        .next {
+            right: 10px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .prev:hover, .next:hover {
+            background: var(--accent-color);
+            box-shadow: 0 0 8px var(--highlight-glow);
+        }
+        .dots {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 6px;
+            background: var(--muted-text);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 1px 3px var(--shadow-color);
+        }
+        .dot.active, .dot:hover {
+            background: var(--accent-color);
+            box-shadow: 0 0 6px var(--highlight-glow);
+        }
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+        .contact-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            background: var(--card-bg);
+            padding: 4rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        .contact-form label {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-text);
+            margin-bottom: 0.3rem;
+            text-shadow: 0 1px 2px var(--shadow-color);
+        }
+        .contact-form input, .contact-form textarea {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            padding: 0.8rem;
+            border-radius: 8px;
+            color: var(--primary-text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 6px var(--shadow-color);
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 12px var(--highlight-glow);
+            animation: glowPulse 1.5s infinite;
+        }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 12px var(--highlight-glow); }
+            50% { box-shadow: 0 0 20px var(--highlight-glow); }
+            100% { box-shadow: 0 0 12px var(--highlight-glow); }
+        }
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .contact-form button {
+            background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
+            color: var(--primary-text);
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: buttonPulse 2s infinite;
+            box-shadow: 0 4px 12px var(--shadow-color), 0 0 8px var(--highlight-glow);
+        }
+        .contact-form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px var(--shadow-color), 0 0 15px var(--highlight-glow);
+        }
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            fill: var(--accent-color);
+            transition: transform 0.4s, filter 0.4s;
+            filter: drop-shadow(0 2px 6px var(--shadow-color));
+        }
+        .contact-icon:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px var(--highlight-glow));
+        }
+        .contact-intro {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            text-align: center;
+            color: var(--muted-text);
+            font-size: 1.1rem;
+        }
+        footer {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -4px 8px var(--shadow-color);
+        }
+        footer p {
+            color: var(--muted-text);
+            margin: 0;
+        }
+        footer a {
+            color: var(--accent-color);
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: text-shadow 0.3s;
+        }
+        footer a:hover {
+            color: var(--hover-color);
+            text-shadow: 0 0 6px var(--highlight-glow);
+        }
+        #hero {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Data+Visualization');
+        }
+        #about {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Data+Analytics+Charts');
+        }
+        #skills {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Code+and+Graphs');
+        }
+        #projects {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Dashboard+Visuals');
+        }
+        #experience {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Data+Pipeline+GIF');
+        }
+        #certifications {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Analytics+Certificates');
+        }
+        #contact {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Data+Network');
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            .section h2 {
+                font-size: 2rem;
+            }
+            .card {
+                max-width: 100%;
+            }
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-form {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+            }
+            nav a {
+                margin: 0 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 400px) {
+            nav {
+                padding: 0.5rem;
+            }
+            nav a {
+                margin: 0 0.5rem;
+                font-size: 0.8rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="#hero" aria-label="Home Section">Home</a>
+        <a href="#about" aria-label="About Section">About</a>
+        <a href="#skills" aria-label="Skills Section">Skills</a>
+        <a href="#projects" aria-label="Projects Section">Projects</a>
+        <a href="#experience" aria-label="Training Section">Training & Internship</a>
+        <a href="#certifications" aria-label="Certifications Section">Certifications</a>
+        <a href="#contact" aria-label="Contact Section">Contact</a>
+    </nav>
+    <section class="section hero" id="hero">
+        <img src="D:\Portfolio\22A91A4463_2-removebg-preview.png" alt="Lohith Medisetti Profile Picture" class="profile-img">
+        <p style="color: var(--muted-text); font-size: 1.2rem; margin-top: 0;">Turning Raw Data into Real-World Insights</p>
+        <h1>Lohith Medisetti</h1>
+        <p>
+            Data Analyst | B.Tech in CSE - Data Science<br>
+            ✨ Microsoft Certified | Power BI | SQL | Python | Microsoft Fabric<br>
+            🎯 All India Level Shooting Athlete | Disciplined, Focused & Driven
+        </p>
+        <p>
+            <a href="mailto:lohithmedisettit@gmail.com" aria-label="Email Lohith">lohithmedisettit@gmail.com</a> |
+            <a href="D:\Portfolio\__LOHITH__MEDISETTI__.pdf" download aria-label="Download Resume">Download Resume</a>
+        </p>
+    </section>
+    <section class="section" id="about">
+        <h2>About Me</h2>
+        <div class="vertical-container">
+            <div class="card">
+                <p>
+                    Hi, I’m Lohith — a <strong>Microsoft Certified Fabric Analytics Engineer Associate</strong> and a <strong>Data Science undergraduate at Aditya University</strong>. I specialize in building interactive dashboards and efficient data solutions using <strong>Power BI, SQL, Python</strong>, and <strong>Microsoft Fabric</strong>.
+                    As a <strong>#DriveReady trainee</strong> at Technical Hub, I’ve worked on real-time projects across domains like sports analytics, educational dashboards, financial trends, and weather insights. I’ve also earned the <strong>Google Cloud Career Launchpad Certificate</strong>, which enhanced my ability to work with modern cloud-based platforms.
+                    Beyond academics, I am a <strong>national-level shooting athlete</strong>, having represented at the <strong>All India level</strong>. This background instilled in me strong focus, discipline, and a performance mindset.
+                    I'm passionate about uncovering insights from raw data and aim to evolve into a leading analytics professional who delivers real business impact.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="skills">
+        <h2>Technical Skills</h2>
+        <div class="vertical-container">
+            <div class="card">
+                <h3>Languages</h3>
+                <p>Python, SQL, DAX, HTML, CSS</p>
+            </div>
+            <div class="card">
+                <h3>Tools & Technologies</h3>
+                <p>Power BI, Microsoft Fabric, Tableau, PySpark, MS Excel</p>
+            </div>
+            <div class="card">
+                <h3>Core Skills</h3>
+                <p>Data Visualization, Dashboard Creation, Data Analysis, Power Query</p>
+            </div>
+            <div class="card">
+                <h3>Version Control</h3>
+                <p>Git, GitHub</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="projects">
+        <h2>Projects</h2>
+        <div class="vertical-container">
+            <div class="card">
+                <h3><a href="https://github.com/Lohith4463/POWERBI/blob/main/Aditya%20Academic%20Explorer.pbix" target="_blank" aria-label="Aditya Academic Explorer Power BI Dashboard">Aditya Academic Explorer Power BI Dashboard</a></h3>
+                <p>Developed an interactive Power BI dashboard for Aditya University’s Admission Cell, featuring multi-level drilldowns, branch analytics, and dynamic visuals for programs, fees, and scholarships. Integrated campus and industry views with student clubs, sports facilities, industry tie-ups, certification programs, internships, and workshops. Improved efficiency by 20% with streamlined insights and user-friendly navigation.</p>
+                <p><strong>Technologies:</strong> Power BI, DAX, Excel</p>
+                <div class="slideshow-container" id="slideshow-aditya">
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\1.png" alt="Aditya Dashboard Main View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\2.png" alt="Aditya Dashboard Branch Analytics View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\3.png" alt="Aditya Dashboard Fee Structure View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\4.png" alt="Aditya Dashboard Scholarships View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\5.png" alt="Aditya Dashboard Student Clubs View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\6.png" alt="Aditya Dashboard Sports Facilities View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\7.png" alt="Aditya Dashboard Industry Tie-Ups View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\8.png" alt="Aditya Dashboard Internships View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\2\9.png" alt="Aditya Dashboard Workshops View">
+                    </div>
+                    <a class="prev" onclick="changeSlide('slideshow-aditya', -1)" aria-label="Previous Slide">❮</a>
+                    <a class="next" onclick="changeSlide('slideshow-aditya', 1)" aria-label="Next Slide">❯</a>
+                </div>
+                <div class="dots">
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 1)" aria-label="Slide 1"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 2)" aria-label="Slide 2"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 3)" aria-label="Slide 3"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 4)" aria-label="Slide 4"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 5)" aria-label="Slide 5"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 6)" aria-label="Slide 6"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 7)" aria-label="Slide 7"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 8)" aria-label="Slide 8"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-aditya', 9)" aria-label="Slide 9"></span>
+                </div>
+            </div>
+            <div class="card">
+                <h3><a href="#t20-world-cup" target="_blank" aria-label="ICC Men's T20 World Cup 2021 Analysis">ICC Men's T20 World Cup 2021 Analysis</a></h3>
+                <p>Architected a Power BI dashboard visualizing 45 matches and 350+ players’ statistics with 15 interactive visualizations. Programmed 8 PySpark data transformation scripts to process 20GB of raw cricket data, reducing processing time by 40%.</p>
+                <p><strong>Technologies:</strong> Power BI, PySpark, Python, Excel</p>
+                <div class="slideshow-container" id="slideshow-t20">
+                    <div class="slide">
+                        <img src="D:\Portfolio\1\1.png" alt="T20 Dashboard Main View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\1\2.png" alt="T20 Dashboard Player Statistics">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\1\3.png" alt="T20 Dashboard Match Analysis">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\1\4.png" alt="T20 Dashboard Additional View">
+                    </div>
+                    <a class="prev" onclick="changeSlide('slideshow-t20', -1)" aria-label="Previous Slide">❮</a>
+                    <a class="next" onclick="changeSlide('slideshow-t20', 1)" aria-label="Next Slide">❯</a>
+                </div>
+                <div class="dots">
+                    <span class="dot" onclick="currentSlide('slideshow-t20', 1)" aria-label="Slide 1"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-t20', 2)" aria-label="Slide 2"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-t20', 3)" aria-label="Slide 3"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-t20', 4)" aria-label="Slide 4"></span>
+                </div>
+            </div>
+            <div class="card">
+                <h3><a href="#accenture-placement" target="_blank" aria-label="Accenture Placement Analysis Dashboard">Accenture Placement Analysis Dashboard</a></h3>
+                <p>Spearheaded a Power BI dashboard tracking 500+ students across 8 departments, identifying 3 key factors that boosted placement rates by 5%.</p>
+                <p><strong>Technologies:</strong> Power BI, Excel</p>
+                <div class="slideshow-container" id="slideshow-accenture">
+                    <div class="slide">
+                        <img src="D:\Portfolio\3\1.png" alt="Accenture Dashboard Main View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\3\2.png" alt="Accenture Dashboard Department Analytics">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\3\3.png" alt="Accenture Dashboard Placement Trends">
+                    </div>
+                    <a class="prev" onclick="changeSlide('slideshow-accenture', -1)" aria-label="Previous Slide">❮</a>
+                    <a class="next" onclick="changeSlide('slideshow-accenture', 1)" aria-label="Next Slide">❯</a>
+                </div>
+                <div class="dots">
+                    <span class="dot" onclick="currentSlide('slideshow-accenture', 1)" aria-label="Slide 1"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-accenture', 2)" aria-label="Slide 2"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-accenture', 3)" aria-label="Slide 3"></span>
+                </div>
+            </div>
+            <div class="card">
+                <h3><a href="#stock-market" target="_blank" aria-label="Product and Customer Sales Analysis Dashboard">Product and Customer Sales Analysis Dashboard</a></h3>
+                <p>Built an interactive Power BI dashboard to analyze global sales, customer segments, and product categories. Asia Pacific led in sales, Corporate was the top customer segment, and Body Care emerged as the most profitable category.</p>
+                <p><strong>Technologies:</strong> Power BI, Excel</p>
+                <div class="slideshow-container" id="slideshow-stock">
+                    <div class="slide">
+                        <img src="D:\Portfolio\5\1.png" alt="Stock Market Dashboard Main View">
+                    </div>
+                    <div class="slide">
+                        <img src="D:\Portfolio\5\2.png" alt="Stock Market Dashboard Trend Analysis">
+                    </div>
+                    <a class="prev" onclick="changeSlide('slideshow-stock', -1)" aria-label="Previous Slide">❮</a>
+                    <a class="next" onclick="changeSlide('slideshow-stock', 1)" aria-label="Next Slide">❯</a>
+                </div>
+                <div class="dots">
+                    <span class="dot" onclick="currentSlide('slideshow-stock', 1)" aria-label="Slide 1"></span>
+                    <span class="dot" onclick="currentSlide('slideshow-stock', 2)" aria-label="Slide 2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="experience">
+        <h2>Training & Internship</h2>
+        <div class="vertical-container">
+            <div class="card">
+                <h3>📊 Data Analytics Trainee & Intern, Technical Hub</h3>
+                <p>Trained at Technical Hub from May 2024 to May 2025, gaining hands-on experience in Power BI, Microsoft Fabric, Excel, and SQL.</p>
+                <p>Worked on real-world datasets to build dynamic dashboards covering domains like sales, education, sports, and weather.</p>
+                <p>Learned data cleaning, modeling, and KPI calculations using Power Query and DAX.</p>
+                <p>From May to June 2025, completed a focused internship where I developed live dashboards and automated reporting solutions.</p>
+                <p>Visualized customer insights, market performance, and product trends to support data-driven decisions.</p>
+                <p>This experience strengthened my skills in business intelligence, data storytelling, and end-to-end dashboard development.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="certifications">
+        <h2>Certifications</h2>
+        <div class="vertical-container">
+            <div class="card">
+                <h3><a href="#microsoft-fabric" target="_blank" aria-label="Microsoft Fabric Analytics Engineer Associate">Microsoft Fabric Analytics Engineer Associate</a></h3>
+                <p>Completed certification in Microsoft Fabric, specializing in data analytics and engineering.</p>
+            </div>
+            <div class="card">
+                <h3><a href="#google-cloud" target="_blank" aria-label="Google Cloud Career Launchpad Certificate">Google Cloud Career Launchpad Certificate</a></h3>
+                <p>Earned certification in Google Cloud, demonstrating proficiency in cloud-based data analytics and infrastructure.</p>
+            </div>
+            <div class="card">
+                <h3><a href="#python" target="_blank" aria-label="IT Specialist Python">IT Specialist Python</a></h3>
+                <p>Completed certification validating advanced skills in Python programming for data analysis and automation.</p>
+            </div>
+            <div class="card">
+                <h3><a href="#html-css" target="_blank" aria-label="IT Specialist HTML & CSS">IT Specialist HTML & CSS</a></h3>
+                <p>Achieved certification in HTML and CSS, showcasing expertise in web development and design.</p>
+            </div>
+            <div class="card">
+                <h3><a href="#forage" target="_blank" aria-label="Forage Job Simulations">Forage Job Simulations</a></h3>
+                <p>Completed virtual work experience programs in data analytics, focusing on real-world data analysis scenarios.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="contact">
+        <h2>Contact</h2>
+        <p class="contact-intro">Let's connect! Feel free to reach out for collaboration, inquiries, or to discuss data analytics projects.</p>
+        <div class="contact-container">
+            
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.17-5.24l-4.88-2.93c-.39-.23-.88-.08-1.12.31-.24.39-.08.88.31 1.12l4.88 2.93c.39.23.88.08 1.12-.31.24-.39.08-.88-.31-1.12z" />
+            </svg>
+            <form class="contact-form" action="https://formspree.io/f/mvgqpwbg" method="POST">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Your Message" rows="5" required aria-required="true"></textarea>
+                <button type="submit" aria-label="Send Message">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <p>
+            <a href="https://www.linkedin.com/in/lohith-medisetti-0a9979268/" target="_blank" aria-label="LinkedIn Profile">LinkedIn</a> |
+            <a href="https://github.com/Lohith4463" target="_blank" aria-label="GitHub Profile">GitHub</a> |
+            <a href="mailto:lohithmedisettit@gmail.com" aria-label="Email Lohith">Email</a>
+        </p>
+        <p>© 2025 Lohith Medisetti. All rights reserved.</p>
+    </footer>
+    <script>
+        const slideshows = {
+            'slideshow-aditya': { index: 1 },
+            'slideshow-t20': { index: 1 },
+            'slideshow-accenture': { index: 1 },
+            'slideshow-stock': { index: 1 }
+        };
+
+        function showSlides(slideshowId, n) {
+            const slideshow = document.getElementById(slideshowId);
+            if (!slideshow) return;
+            const slides = slideshow.getElementsByClassName('slide');
+            const dots = slideshow.nextElementSibling?.getElementsByClassName('dot') || [];
+            if (slides.length === 0) return;
+
+            let index = n;
+            if (index > slides.length) index = 1;
+            if (index < 1) index = slides.length;
+            slideshows[slideshowId].index = index;
+
+            Array.from(slides).forEach(slide => slide.style.display = 'none');
+            Array.from(dots).forEach(dot => dot.className = dot.className.replace(' active', ''));
+
+            slides[index - 1].style.display = 'block';
+            if (dots[index - 1]) dots[index - 1].className += ' active';
+        }
+
+        function changeSlide(slideshowId, n) {
+            showSlides(slideshowId, slideshows[slideshowId].index + n);
+        }
+
+        function currentSlide(slideshowId, n) {
+            showSlides(slideshowId, n);
+        }
+
+        Object.keys(slideshows).forEach(slideshowId => {
+            try {
+                showSlides(slideshowId, slideshows[slideshowId].index);
+                setInterval(() => changeSlide(slideshowId, 1), 3000);
+            } catch (error) {
+                console.error(`Error initializing slideshow ${slideshowId}:`, error);
+            }
+        });
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.querySelectorAll('.card').forEach(card => {
+                        card.classList.add('visible');
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            particles.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
