@@ -6,6 +6,7 @@
     <title>Lohith Medisetti - Portfolio</title>
     <link rel="icon" type="image/x-icon" href="22A91A4463_2-removebg-preview.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         :root {
             --bg-color: #1A1A2E;
@@ -50,17 +51,20 @@
             50% { opacity: 0.8; transform: translateY(-50vh) scale(1.1); }
             100% { transform: translateY(-100vh) scale(1); opacity: 0.6; }
         }
-        nav {
+        .navbar {
             position: sticky;
             top: 0;
             background: rgba(26, 26, 46, 0.8);
             backdrop-filter: blur(8px);
             padding: 1rem;
             z-index: 1000;
-            text-align: center;
             box-shadow: 0 4px 8px var(--shadow-color);
         }
-        nav a {
+        .navbar-nav {
+            justify-content: center;
+            width: 100%;
+        }
+        .navbar-nav .nav-link {
             color: var(--primary-text);
             text-decoration: none;
             margin: 0 1.5rem;
@@ -68,7 +72,7 @@
             font-weight: 700;
             transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
         }
-        nav a:hover {
+        .navbar-nav .nav-link:hover {
             color: var(--accent-color);
             transform: scale(1.1);
             text-shadow: 0 0 8px var(--highlight-glow);
@@ -308,7 +312,7 @@
             margin-bottom: 0.3rem;
             text-shadow: 0 1px 2px var(--shadow-color);
         }
-        .contact-form input, .contact-form textarea {
+        .contact-form .form-control {
             background: var(--card-bg);
             border: 2px solid var(--border-color);
             padding: 0.8rem;
@@ -319,7 +323,7 @@
             transition: border-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 2px 6px var(--shadow-color);
         }
-        .contact-form input:focus, .contact-form textarea:focus {
+        .contact-form .form-control:focus {
             outline: none;
             border-color: var(--accent-color);
             box-shadow: 0 0 12px var(--highlight-glow);
@@ -334,7 +338,7 @@
             resize: vertical;
             min-height: 120px;
         }
-        .contact-form button {
+        .contact-form .btn {
             background: linear-gradient(45deg, var(--accent-color), var(--hover-color));
             color: var(--primary-text);
             padding: 1rem;
@@ -347,7 +351,7 @@
             animation: buttonPulse 2s infinite;
             box-shadow: 0 4px 12px var(--shadow-color), 0 0 8px var(--highlight-glow);
         }
-        .contact-form button:hover {
+        .contact-form .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 16px var(--shadow-color), 0 0 15px var(--highlight-glow);
         }
@@ -451,16 +455,16 @@
                 width: 60px;
                 height: 60px;
             }
-            nav a {
+            .navbar-nav .nav-link {
                 margin: 0 0.8rem;
                 font-size: 0.9rem;
             }
         }
         @media (max-width: 400px) {
-            nav {
+            .navbar {
                 padding: 0.5rem;
             }
-            nav a {
+            .navbar-nav .nav-link {
                 margin: 0 0.5rem;
                 font-size: 0.8rem;
             }
@@ -475,14 +479,37 @@
 </head>
 <body>
     <div id="particles"></div>
-    <nav role="navigation" aria-label="Main navigation">
-        <a href="#hero" aria-label="Home Section">Home</a>
-        <a href="#about" aria-label="About Section">About</a>
-        <a href="#skills" aria-label="Skills Section">Skills</a>
-        <a href="#projects" aria-label="Projects Section">Projects</a>
-        <a href="#experience" aria-label="Training Section">Training & Internship</a>
-        <a href="#certifications" aria-label="Certifications Section">Certifications</a>
-        <a href="#contact" aria-label="Contact Section">Contact</a>
+    <nav class="navbar navbar-expand-lg sticky-top" role="navigation" aria-label="Main navigation">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero" aria-label="Home Section">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" aria-label="About Section">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills" aria-label="Skills Section">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects" aria-label="Projects Section">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience" aria-label="Training Section">Training & Internship</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#certifications" aria-label="Certifications Section">Certifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" aria-label="Contact Section">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
     <section class="section hero" id="hero">
         <img src="22A91A4463_2-removebg-preview.png" alt="Lohith Medisetti Profile Picture" class="profile-img">
@@ -541,31 +568,31 @@
                 <p><strong>Technologies:</strong> Power BI, DAX, Excel</p>
                 <div class="slideshow-container" id="slideshow-aditya">
                     <div class="slide">
-                        <img src="2\1.png" alt="Aditya Dashboard Main View">
+                        <img src="2\1.png" alt="Aditya Dashboard Main View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\2.png" alt="Aditya Dashboard Branch Analytics View">
+                        <img src="2\2.png" alt="Aditya Dashboard Branch Analytics View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\3.png" alt="Aditya Dashboard Fee Structure View">
+                        <img src="2\3.png" alt="Aditya Dashboard Fee Structure View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\4.png" alt="Aditya Dashboard Scholarships View">
+                        <img src="2\4.png" alt="Aditya Dashboard Scholarships View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\5.png" alt="Aditya Dashboard Student Clubs View">
+                        <img src="2\5.png" alt="Aditya Dashboard Student Clubs View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\6.png" alt="Aditya Dashboard Sports Facilities View">
+                        <img src="2\6.png" alt="Aditya Dashboard Sports Facilities View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\7.png" alt="Aditya Dashboard Industry Tie-Ups View">
+                        <img src="2\7.png" alt="Aditya Dashboard Industry Tie-Ups View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\8.png" alt="Aditya Dashboard Internships View">
+                        <img src="2\8.png" alt="Aditya Dashboard Internships View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="2\9.png" alt="Aditya Dashboard Workshops View">
+                        <img src="2\9.png" alt="Aditya Dashboard Workshops View" class="img-fluid">
                     </div>
                     <a class="prev" onclick="changeSlide('slideshow-aditya', -1)" aria-label="Previous Slide">❮</a>
                     <a class="next" onclick="changeSlide('slideshow-aditya', 1)" aria-label="Next Slide">❯</a>
@@ -588,16 +615,16 @@
                 <p><strong>Technologies:</strong> Power BI, PySpark, Python, Excel</p>
                 <div class="slideshow-container" id="slideshow-t20">
                     <div class="slide">
-                        <img src="1/1.png" alt="T20 Dashboard Main View">
+                        <img src="1/1.png" alt="T20 Dashboard Main View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="1\2.png" alt="T20 Dashboard Player Statistics">
+                        <img src="1\2.png" alt="T20 Dashboard Player Statistics" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="1\3.png" alt="T20 Dashboard Match Analysis">
+                        <img src="1\3.png" alt="T20 Dashboard Match Analysis" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="1\4.png" alt="T20 Dashboard Additional View">
+                        <img src="1\4.png" alt="T20 Dashboard Additional View" class="img-fluid">
                     </div>
                     <a class="prev" onclick="changeSlide('slideshow-t20', -1)" aria-label="Previous Slide">❮</a>
                     <a class="next" onclick="changeSlide('slideshow-t20', 1)" aria-label="Next Slide">❯</a>
@@ -615,13 +642,13 @@
                 <p><strong>Technologies:</strong> Power BI, Excel</p>
                 <div class="slideshow-container" id="slideshow-accenture">
                     <div class="slide">
-                        <img src="3\1.png" alt="Accenture Dashboard Main View">
+                        <img src="3\1.png" alt="Accenture Dashboard Main View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="3\2.png" alt="Accenture Dashboard Department Analytics">
+                        <img src="3\2.png" alt="Accenture Dashboard Department Analytics" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="3\3.png" alt="Accenture Dashboard Placement Trends">
+                        <img src="3\3.png" alt="Accenture Dashboard Placement Trends" class="img-fluid">
                     </div>
                     <a class="prev" onclick="changeSlide('slideshow-accenture', -1)" aria-label="Previous Slide">❮</a>
                     <a class="next" onclick="changeSlide('slideshow-accenture', 1)" aria-label="Next Slide">❯</a>
@@ -638,10 +665,10 @@
                 <p><strong>Technologies:</strong> Power BI, Excel</p>
                 <div class="slideshow-container" id="slideshow-stock">
                     <div class="slide">
-                        <img src="5\1.png" alt="Stock Market Dashboard Main View">
+                        <img src="5\1.png" alt="Stock Market Dashboard Main View" class="img-fluid">
                     </div>
                     <div class="slide">
-                        <img src="5\2.png" alt="Stock Market Dashboard Trend Analysis">
+                        <img src="5\2.png" alt="Stock Market Dashboard Trend Analysis" class="img-fluid">
                     </div>
                     <a class="prev" onclick="changeSlide('slideshow-stock', -1)" aria-label="Previous Slide">❮</a>
                     <a class="next" onclick="changeSlide('slideshow-stock', 1)" aria-label="Next Slide">❯</a>
@@ -692,17 +719,23 @@
         <h2>Contact</h2>
         <p class="contact-intro">Let's connect! Feel free to reach out for collaboration, inquiries, or to discuss data analytics projects.</p>
         <div class="contact-container">
-            
+            <svg class="contact-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.17-5.24l-4.88-2.93c-.39-.23-.88-.08-1.12.31-.24.39-.08.88.31 1.12l4.88 2.93c.39.23.88.08 1.12-.31.24-.39.08-.88-.31-1.12z" />
             </svg>
             <form class="contact-form" action="https://formspree.io/f/mvgqpwbg" method="POST">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required aria-required="true">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" required aria-required="true">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Your Message" rows="5" required aria-required="true"></textarea>
-                <button type="submit" aria-label="Send Message">Send Message</button>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required aria-required="true">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required aria-required="true">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" name="message" placeholder="Your Message" rows="5" required aria-required="true"></textarea>
+                </div>
+                <button type="submit" class="btn" aria-label="Send Message">Send Message</button>
             </form>
         </div>
     </section>
@@ -714,6 +747,7 @@
         </p>
         <p>© 2025 Lohith Medisetti. All rights reserved.</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         const slideshows = {
             'slideshow-aditya': { index: 1 },
@@ -758,13 +792,18 @@
             }
         });
 
-        document.querySelectorAll('nav a').forEach(anchor => {
+        document.querySelectorAll('.nav-link').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
                 }
             });
         });
